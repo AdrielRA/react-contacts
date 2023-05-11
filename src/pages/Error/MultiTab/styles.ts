@@ -20,11 +20,12 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    box-shadow: black solid 2px;
-    background-color: ${({ theme }) => theme.colors.background.main};
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 18px 0px;
+    background-color: ${({ theme }) => theme.colors.background.light};
   }
 
-  #actions {
+  .actions {
     width: 100%;
     display: flex;
     margin-top: 20px;

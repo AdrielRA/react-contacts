@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+noscript {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  font-family: "Poppins", sans-serif !important;
+}
+
+noscript div {
+  display: flex;
+  padding: 30px;
+  margin: 0 30px;
+  border-radius: 20px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 6px #00000029;
+  font-family: "Poppins", sans-serif !important;
+}
+
+noscript img {
+  width: 150px;
+  aspect-ratio: 1;
+  margin-bottom: 30px;
+}
+
+noscript p {
+  text-align: center;
+}
+
+noscript #main-text {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+noscript a,
+noscript a:visited {
+  color: #4196ee;
+  text-decoration: none;
+}
+
+noscript a:hover {
+  text-decoration: underline;
+}
