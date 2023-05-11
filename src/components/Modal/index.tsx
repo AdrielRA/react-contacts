@@ -4,15 +4,12 @@ import {
   Fade,
   Modal as MuiModal,
   ModalProps as MuiModalProps,
-  SxProps,
-  Theme,
 } from "@mui/material";
 import { Props } from "props";
 import { boxStyle } from "./styles";
 
 export interface ModalProps extends Omit<MuiModalProps, "children"> {
   onClose?: () => void;
-  sx?: SxProps<Theme>;
 }
 
 const Modal: React.FC<ModalProps & Props> = ({
@@ -36,12 +33,7 @@ const Modal: React.FC<ModalProps & Props> = ({
       {...props}
     >
       <Fade in={open}>
-        <Box
-          sx={{
-            ...boxStyle,
-            ...sx,
-          }}
-        >
+        <Box sx={[boxStyle, ...(Array.isArray(sx) ? sx : [sx])]}>
           {children}
         </Box>
       </Fade>

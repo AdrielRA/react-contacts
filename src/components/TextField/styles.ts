@@ -5,8 +5,7 @@ interface InputStyleProps {
   rows?: number;
 }
 
-export const Container = styled.input<InputStyleProps>`
-  margin: 4px 0;
+export const Container = styled.div<InputStyleProps>`
   width: 100%;
 
   .MuiInputBase-root {

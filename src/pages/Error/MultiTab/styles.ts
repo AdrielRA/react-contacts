@@ -9,8 +9,8 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.text};
-  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text.main};
+  background-color: ${({ theme }) => theme.colors.background.main};
 
   & > div {
     display: flex;
@@ -21,7 +21,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     box-shadow: black solid 2px;
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.background.main};
   }
 
   #actions {

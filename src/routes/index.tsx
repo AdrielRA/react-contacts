@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+import { AnimationLayout } from "components";
 import { Auth, Error, MultiTabError } from "pages";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -31,16 +32,18 @@ const Router = () => {
         <BrowserRouter>
           <Suspense fallback={<CircularProgress />}>
             <Routes>
-              <Route path="/" element={<Auth />} />
-              <Route
-                path="/home"
-                element={
-                  <AuthRoute>
-                    <Home />
-                  </AuthRoute>
-                }
-              />
-              <Route path="*" element={<Error />} />
+              <Route element={<AnimationLayout />}>
+                <Route path="/" element={<Auth />} />
+                <Route
+                  path="/home"
+                  element={
+                    <AuthRoute>
+                      <Home />
+                    </AuthRoute>
+                  }
+                />
+                <Route path="*" element={<Error />} />
+              </Route>
             </Routes>
           </Suspense>
         </BrowserRouter>

@@ -3,17 +3,35 @@ import {
   Button as MuiButton,
   ButtonProps as MuiButtonProps,
 } from "@mui/material";
-import { Container } from "./styles";
-
 type ButtonProps = MuiButtonProps & {
   isLoading?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ isLoading, ...props }) => {
+const Button: React.FC<ButtonProps> = ({
+  size,
+  color,
+  endIcon,
+  isLoading = false,
+  variant = "contained",
+  ...props
+}) => {
   return (
-    <Container>
-      <MuiButton {...props} endIcon={isLoading ? <CircularProgress /> : null} />
-    </Container>
+    <MuiButton
+      size={size}
+      color={color}
+      variant={variant}
+      endIcon={
+        isLoading ? (
+          <CircularProgress
+            size={size === "small" ? 14 : size === "large" ? 20 : 18}
+            color={variant === "contained" ? "inherit" : color}
+          />
+        ) : (
+          endIcon
+        )
+      }
+      {...props}
+    />
   );
 };
 

@@ -22,7 +22,9 @@ const Error: React.FC<ErrorPageProps> = ({ statusCode, message, onReset }) => {
   return (
     <Container>
       <div className="help">
-        <Typography variant="h1">{status}</Typography>
+        <Typography variant="h1" color="error">
+          {status}
+        </Typography>
         <strong>
           {message ?? "A pagina solicitada parece que esta fora do ar."}
         </strong>

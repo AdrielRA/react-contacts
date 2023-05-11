@@ -4,7 +4,7 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.text.main};
 
   & > div {
     height: min-content;
@@ -54,7 +54,7 @@ export const Container = styled.div`
 
     a,
     a:visited {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary.main};
       text-decoration: none;
     }
 

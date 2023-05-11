@@ -1,19 +1,29 @@
+import { ChevronRight } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import { Button, TextField } from "components";
 import { useAlert, useAuth } from "contexts";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sleep } from "utils/tools";
 import { Card, Container, Form } from "./styles";
 
 const Home: React.FC = () => {
-  const { signIn, logged } = useAuth();
   const confirm = useAlert();
+  const navigate = useNavigate();
+  const { signIn, logged } = useAuth();
+
   const [email, setEmail] = useState<string>();
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState<string>();
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (logged) navigate("/home");
+  }, [navigate, logged]);
 
   const handleLogin = async () => {
+    if (loading) return;
+    setLoading(true);
+
     if (!email) {
       await confirm.show({
         type: "error",
@@ -43,8 +53,12 @@ const Home: React.FC = () => {
       return;
     }
 
-    if (email === "user@user.com" && password === "senha forte") signIn();
-    else
+    if (email === "user@user.com" && password === "senha forte") {
+      await sleep(1000);
+      signIn();
+    } else {
+      await sleep(500);
+      setLoading(false);
       await confirm.show({
         type: "error",
         title: "Falha ao logar",
@@ -53,11 +67,8 @@ const Home: React.FC = () => {
           callback: handleLogin,
         },
       });
+    }
   };
-
-  useEffect(() => {
-    if (logged) navigate("/home");
-  }, [navigate, logged]);
 
   return (
     <Container>
@@ -71,26 +82,30 @@ const Home: React.FC = () => {
         <Typography>Bem-vindo ao sistema!</Typography>
         <Form>
           <TextField
-            size="small"
             fullWidth
+            size="small"
             type="email"
             name="email"
             label="E-mail"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            size="small"
             fullWidth
+            size="small"
+            label="Senha"
+            maxLength={20}
             type="password"
             name="password"
-            label="Senha"
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button
-            sx={{ width: "50%" }}
+            sx={{ width: "70%", mt: 2 }}
             type="button"
-            variant="contained"
+            isLoading={loading}
+            size="small"
+            endIcon={<ChevronRight />}
             onClick={handleLogin}
           >
             Entrar

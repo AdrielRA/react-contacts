@@ -13,12 +13,12 @@ const ErrorBoundary: React.FC<ErrorProps> = ({ children }) => {
         return;
       }
       //LoggerController.error(error.error || error);
-      window.history.pushState(
-        { error: error.error ?? error },
-        "",
-        "/error/500",
-      );
-      window.location.href = "/error/500";
+      // window.history.pushState(
+      //   { error: error.error ?? error },
+      //   "",
+      //   "/error/500",
+      // );
+      // window.location.href = "/error/500";
     },
     [ignored],
   );
