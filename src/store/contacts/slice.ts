@@ -5,14 +5,16 @@ export const contactsSlice = createSlice({
   name: "contacts",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    create: (state) => {
+      state.push({
+        id: state.length + 1,
+        name: "Contact",
+        category: "none",
+      });
     },
-    decrement: (state) => {
-      state.value -= 1;
+    remove: (state) => {
+      state.pop();
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
+    add: (state, { payload }: PayloadAction<IContact>) => state.push(payload),
   },
 });

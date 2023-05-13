@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { decryptData, encryptData } from "utils/crypto";
+const SALT = import.meta.env.VITE_TEST_VAR;
 
 export const usePersistedState = <T>(
   key: string,
   initialState: T,
-  encrypt = false
+  encrypt = false,
 ) => {
   const [state, setState] = useState<T>(() => {
     let storageValue = localStorage.getItem(key);
-    if (storageValue && encrypt && process.env.REACT_APP_SALT) {
-      storageValue = decryptData(storageValue, process.env.REACT_APP_SALT);
+    if (storageValue && encrypt && SALT) {
+      storageValue = decryptData(storageValue, SALT);
     }
 
     try {
@@ -28,8 +29,8 @@ export const usePersistedState = <T>(
       return;
     }
     let storageValue = JSON.stringify(state);
-    if (encrypt && process.env.REACT_APP_SALT) {
-      storageValue = encryptData(storageValue, process.env.REACT_APP_SALT);
+    if (encrypt && SALT) {
+      storageValue = encryptData(storageValue, SALT);
     }
     localStorage.setItem(key, storageValue);
   }, [encrypt, key, state]);

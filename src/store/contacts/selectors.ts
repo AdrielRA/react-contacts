@@ -1,3 +1,3 @@
 import { RootState } from "..";
 
-export const selectCount = (state: RootState) => state.contacts.value;
+export const selectCount = (state: RootState) => state.contacts.length;

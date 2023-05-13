@@ -1,0 +1,81 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Jorge da silva",
+      "category": "Amigo",
+      "contactInfo": [
+        {
+          "id": 1,
+          "type": "cell",
+          "value": "359707070"
+        },
+        {
+          "id": 2,
+          "type": "phone",
+          "value": "359707071"
+        },
+        {
+          "id": 3,
+          "type": "whatsapp",
+          "value": "359707072"
+        },
+        {
+          "id": 4,
+          "type": "email",
+          "value": "jorge.silva@gmail.com"
+        }
+      ],
+      "addresses": [
+        {
+          "id": 1,
+          "street": "R. Maranhão",
+          "number": "11",
+          "province": "Centro",
+          "complement": "Casa A",
+          "city": "São Paulo",
+          "state": "SP",
+          "zipCode": "01234-000"
+        },
+        {
+          "id": 2,
+          "street": "R. Sete de Setembro",
+          "number": "42",
+          "province": "Vila Madalena",
+          "city": "Rio de Janeiro",
+          "state": "RJ",
+          "zipCode": "04321-000"
+        }
+      ]
+    },
+    {
+      "name": "Contato 02",
+      "category": "Família",
+      "contactInfo": [
+        {
+          "id": 1,
+          "type": "whatsapp",
+          "value": "359707075"
+        },
+        {
+          "id": 2,
+          "type": "email",
+          "value": "contato02@gmail.com"
+        }
+      ],
+      "addresses": [
+        {
+          "id": 1,
+          "street": "Av. Rio Branco",
+          "number": "128",
+          "province": "Jardim Paraiso",
+          "complement": "Apto. 06",
+          "city": "Ribeirão Preto",
+          "state": "SP",
+          "zipCode": "45901-000"
+        }
+      ],
+      "id": 2
+    }
+  ]
+}

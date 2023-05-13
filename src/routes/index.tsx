@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthRoute from "./AuthRoute";
 
 const Home = lazy(() => import("pages/Home"));
+const Contact = lazy(() => import("pages/Contact"));
 
 const Router = () => {
   const [anotherTab, setAnotherTab] = useState(false);
@@ -42,6 +43,32 @@ const Router = () => {
                     </AuthRoute>
                   }
                 />
+                <Route path="/contact">
+                  <Route
+                    index
+                    element={
+                      <AuthRoute>
+                        <Contact action="new" />
+                      </AuthRoute>
+                    }
+                  />
+                  <Route
+                    path="edit"
+                    element={
+                      <AuthRoute>
+                        <Contact action="edit" />
+                      </AuthRoute>
+                    }
+                  />
+                  <Route
+                    path="view"
+                    element={
+                      <AuthRoute>
+                        <Contact action="view" />
+                      </AuthRoute>
+                    }
+                  />
+                </Route>
                 <Route path="*" element={<Error />} />
               </Route>
             </Routes>

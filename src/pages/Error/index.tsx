@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import MultiTab from "./MultiTab";
 import { Container } from "./styles";
@@ -12,6 +12,14 @@ interface ErrorPageProps {
 
 const Error: React.FC<ErrorPageProps> = ({ statusCode, message, onReset }) => {
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.error(history.state?.error);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   let status = Math.abs(Number(pathname.split("/")[2]));
   status =

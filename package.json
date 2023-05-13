@@ -7,7 +7,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "api": "json-server -p 4000 -w db.json"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -17,6 +18,7 @@
     "@mui/styled-engine-sc": "^5.12.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "^20.1.1",
+    "axios": "^1.4.0",
     "crypto-js": "^4.1.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
@@ -28,7 +30,7 @@
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-imask": "^6.6.1",
+    "react-hook-form": "^7.43.9",
     "react-input-mask": "3.0.0-alpha.2",
     "react-query": "^3.39.3",
     "react-redux": "^8.0.5",

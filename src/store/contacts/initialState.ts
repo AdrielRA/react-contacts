@@ -1,3 +1,1 @@
-export const initialState: IContact = {
-  value: 0,
-};
+export const initialState: IContact[] = [];

@@ -27,6 +27,8 @@ const TextField: React.FC<TextFieldProps> = ({
   mask,
   value,
   resize,
+  onBlur,
+  disabled,
   onChange,
   maxLength,
   helperText,
@@ -53,10 +55,12 @@ const TextField: React.FC<TextFieldProps> = ({
     <Container resize={resize} rows={Number(rows)}>
       <InputMask
         value={value}
+        onBlur={onBlur}
         {...maskOptions}
-        maskPlaceholder={maskOptions?.maskPlaceholder ?? null}
         mask={mask ?? ""}
+        disabled={disabled}
         onChange={handleOnChange}
+        maskPlaceholder={maskOptions?.maskPlaceholder ?? null}
       >
         <MuiTextField
           variant={variant}

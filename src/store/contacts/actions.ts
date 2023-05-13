@@ -1,4 +1,3 @@
 import { contactsSlice } from "./slice";
 
-export const { increment, decrement, incrementByAmount } =
-  contactsSlice.actions;
+export const { create, add, remove } = contactsSlice.actions;
