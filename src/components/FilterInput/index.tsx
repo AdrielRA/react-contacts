@@ -1,4 +1,4 @@
-import { FilterAlt, Search } from "@mui/icons-material";
+import { FilterAlt, ListAlt, Search } from "@mui/icons-material";
 import {
   Grid,
   IconButton,
@@ -38,22 +38,36 @@ const filters: FilterOption[] = [
   },
 ];
 
+type GroupBy = "name" | "category";
+
 interface FilterInputProps {
   sx?: SxProps<Theme>;
   onChange?: (change: { term?: string; field?: string }) => void;
+  onGroupBy?: (groupBy?: GroupBy) => void;
 }
 
-const FilterInput: React.FC<FilterInputProps> = ({ sx, onChange }) => {
+const FilterInput: React.FC<FilterInputProps> = ({
+  sx,
+  onChange,
+  onGroupBy,
+}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const [term, setTerm] = useState<string>();
+  const [groupBy, setGroupBy] = useState<GroupBy>();
   const inputRef = useRef<HTMLDivElement>(null);
   const [selectedFilter, setSelectedFilter] = useState<FilterKey>();
 
   const handleSearch = useCallback(
     () => onChange?.({ term, field: selectedFilter }),
     [onChange, selectedFilter, term],
+  );
+
+  const handleGroupBy = useCallback(
+    () => onGroupBy?.(groupBy),
+    [onGroupBy, groupBy],
   );
 
   useEffect(() => {
@@ -64,6 +78,11 @@ const FilterInput: React.FC<FilterInputProps> = ({ sx, onChange }) => {
     const timer = setTimeout(handleSearch, 1000);
     return () => clearTimeout(timer);
   }, [handleSearch]);
+
+  useEffect(() => {
+    setOpenGroup(false);
+    handleGroupBy();
+  }, [handleGroupBy]);
 
   const handleTermChange = (newTerm: string) => {
     const currentTerm = newTerm.trim();
@@ -97,6 +116,16 @@ const FilterInput: React.FC<FilterInputProps> = ({ sx, onChange }) => {
         onClick={() => setOpenFilter(true)}
       >
         <FilterAlt color="primary" />
+      </IconButton>
+      <IconButton
+        size="small"
+        color="primary"
+        id="group-button"
+        aria-haspopup="listbox"
+        aria-controls="group-menu"
+        onClick={() => setOpenGroup(true)}
+      >
+        <ListAlt color="primary" />
       </IconButton>
     </>
   ));
@@ -172,6 +201,43 @@ const FilterInput: React.FC<FilterInputProps> = ({ sx, onChange }) => {
             {label}
           </MenuItem>
         ))}
+      </Menu>
+      <Menu
+        open={openGroup}
+        id="group-menu"
+        anchorEl={inputRef.current}
+        onClose={() => setOpenGroup(false)}
+        aria-expanded={openGroup ? "true" : undefined}
+        MenuListProps={{
+          "aria-labelledby": "group-button",
+          role: "listbox",
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem disabled>
+          <em>Agrupar por</em>
+        </MenuItem>
+        <MenuItem
+          selected={groupBy === "name"}
+          onClick={() => setGroupBy(groupBy === "name" ? undefined : "name")}
+        >
+          Nome
+        </MenuItem>
+        <MenuItem
+          selected={groupBy === "category"}
+          onClick={() =>
+            setGroupBy(groupBy === "category" ? undefined : "category")
+          }
+        >
+          Categoria
+        </MenuItem>
       </Menu>
     </>
   );

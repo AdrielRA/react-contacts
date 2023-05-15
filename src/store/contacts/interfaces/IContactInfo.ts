@@ -1,5 +1,5 @@
 interface IContactInfo {
-  id: number;
+  id: string;
   type: string;
   value: string;
 }

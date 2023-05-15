@@ -4,5 +4,7 @@ declare module "inputModels" {
     field?: string;
     _page?: number;
     _limit?: number;
+    order?: "asc" | "desc";
+    sort?: "name" | "category";
   }
 }

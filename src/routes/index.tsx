@@ -1,8 +1,8 @@
-import { CircularProgress } from "@mui/material";
 import { AnimationLayout } from "components";
 import { Auth, Error, MultiTabError } from "pages";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Loading } from "src/components";
 import AuthRoute from "./AuthRoute";
 
 const Home = lazy(() => import("pages/Home"));
@@ -31,7 +31,7 @@ const Router = () => {
         <MultiTabError />
       ) : (
         <BrowserRouter>
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<Loading />}>
             <Routes>
               <Route element={<AnimationLayout />}>
                 <Route path="/" element={<Auth />} />

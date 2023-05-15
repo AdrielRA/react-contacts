@@ -1,6 +1,6 @@
 declare module "viewModels" {
   export interface IContactViewModel {
-    id: number;
+    id: string;
     name: string;
     category?: string;
     addresses?: IAddress[];
@@ -8,7 +8,7 @@ declare module "viewModels" {
   }
 
   interface IAddressViewModel {
-    id: number;
+    id: string;
     street: string;
     number: string;
     province: string;
@@ -19,7 +19,7 @@ declare module "viewModels" {
   }
 
   interface IContactInfoViewModel {
-    id: number;
+    id: string;
     type: string;
     value: string;
   }

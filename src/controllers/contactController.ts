@@ -2,7 +2,13 @@ import { IRequestInputModel } from "inputModels";
 import { api } from "services";
 import { IContactViewModel } from "viewModels";
 
-const getContacts = ({ field, term, ...input }: IRequestInputModel) =>
+const getContacts = ({
+  field,
+  term,
+  sort,
+  order,
+  ...input
+}: IRequestInputModel) =>
   new Promise<IContactViewModel[]>((resolve, reject) => {
     api
       .get("contacts", {
@@ -13,6 +19,8 @@ const getContacts = ({ field, term, ...input }: IRequestInputModel) =>
             : {
                 q: term,
               }),
+          _sort: sort,
+          _order: order,
         },
       })
       .then(({ data }) => resolve(data))

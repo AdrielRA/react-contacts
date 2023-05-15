@@ -1,4 +1,3 @@
-import { createTheme } from "@mui/material";
 import { DefaultTheme } from "styled-components";
 
 const light: DefaultTheme = {
@@ -26,33 +25,5 @@ const light: DefaultTheme = {
     },
   },
 };
-
-export const getMuiTheme = () =>
-  createTheme({
-    palette: {
-      primary: {
-        ...light.colors.primary,
-      },
-      secondary: {
-        ...light.colors.secondary,
-      },
-      background: {
-        default: light.colors.background.main,
-        paper: light.colors.background.light,
-      },
-    },
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          contained: {
-            borderRadius: 32,
-          },
-          outlined: {
-            borderRadius: 32,
-          },
-        },
-      },
-    },
-  });
 
 export default light;

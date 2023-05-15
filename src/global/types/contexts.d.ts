@@ -9,9 +9,15 @@ declare module "contexts-types" {
     signIn: () => void;
   };
 
+  type ThemeContextProps = {
+    theme: import("@mui/material").Theme;
+    mode: import("@mui/material").PaletteMode;
+    toggleColorMode: () => void;
+  };
+
   type AlertContextProps = {
     show: (
-      props: import("props").AlertProps
+      props: import("props").AlertProps,
     ) => PromiseLike<boolean | undefined>;
   };
 }

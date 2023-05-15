@@ -1,50 +1,39 @@
 {
   "contacts": [
     {
-      "id": 1,
-      "name": "Jorge da silva",
+      "id": "8b82cfbf-a461-4ebd-97c6-5e2418668441",
+      "name": "Jorge da Silva Mendes",
       "category": "Amigo",
       "contactInfo": [
         {
-          "id": 1,
+          "id": "feb127f3-1e38-4d81-acb0-57772d9f36af",
           "type": "cell",
-          "value": "359707070"
+          "value": "(35) 9 7070-7000"
         },
         {
-          "id": 2,
+          "id": "2d8b8481-5a47-414d-a17f-f34a110293dd",
           "type": "phone",
-          "value": "359707071"
+          "value": "(35) 9707-07122"
         },
         {
-          "id": 3,
+          "id": "15fb04bc-acc0-4740-880a-03ca830a015c",
           "type": "whatsapp",
-          "value": "359707072"
+          "value": "(35) 9707-0722"
         },
         {
-          "id": 4,
+          "id": "53199993-0c6e-4cd6-b894-fb26113a5444",
           "type": "email",
           "value": "jorge.silva@gmail.com"
         }
       ],
       "addresses": [
         {
-          "id": 1,
-          "street": "R. Maranhão",
-          "number": "11",
-          "province": "Centro",
-          "complement": "Casa A",
-          "city": "São Paulo",
-          "state": "SP",
-          "zipCode": "01234-000"
+          "id": "a31da29a-78a3-4a73-87fe-afd942e9b238",
+          "text": "R. Maranhão, 11, Centro, Casa A, São Paulo, SP, 01234-000"
         },
         {
-          "id": 2,
-          "street": "R. Sete de Setembro",
-          "number": "42",
-          "province": "Vila Madalena",
-          "city": "Rio de Janeiro",
-          "state": "RJ",
-          "zipCode": "04321-000"
+          "id": "f1aae970-9af6-43ef-a559-3da1e506f44e",
+          "text": "R. Sete de Setembro, 42, Vila Madalena, Rio de Janeiro - RJ, 04321-000"
         }
       ]
     },
@@ -53,29 +42,179 @@
       "category": "Família",
       "contactInfo": [
         {
-          "id": 1,
+          "id": "7fd74e59-ea1e-4fed-b554-dd4b6e903a48",
           "type": "whatsapp",
-          "value": "359707075"
+          "value": "(35) 9 7070-7500"
         },
         {
-          "id": 2,
+          "id": "3d37f1d9-c6e6-439b-b6e7-7dfa58cee639",
           "type": "email",
           "value": "contato02@gmail.com"
         }
       ],
       "addresses": [
         {
-          "id": 1,
-          "street": "Av. Rio Branco",
-          "number": "128",
-          "province": "Jardim Paraiso",
-          "complement": "Apto. 06",
-          "city": "Ribeirão Preto",
-          "state": "SP",
-          "zipCode": "45901-000"
+          "id": "fb113bf5-8582-4948-893c-4dde62e43fbe",
+          "text": "Av. Rio Branco, 128, Jardim Paraiso, Apto. 06, Ribeirão Preto, SP, 45901-000"
         }
       ],
-      "id": 2
+      "id": "189cad50-9aca-45f7-980d-6d458dbacfa5"
+    },
+    {
+      "name": "com endereço",
+      "category": "Endereçado",
+      "contactInfo": [
+        {
+          "id": "0fee5ae5-edc4-4b7c-bbc8-397f31fd3186",
+          "value": "(35) 9707-07070",
+          "type": "phone"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "af1ceb9c-fcf8-40bd-8f0f-218709a6f3ec",
+          "text": "R. Maranhão, 91A - Nossa Senhora Aparecida, Elói Mendes - MG, 37110-000, Brasil"
+        },
+        {
+          "id": "290e9127-b550-4ace-898c-9c569a41c4f7",
+          "text": "R. Sete de Setembro, Centro, Elói Mendes - MG, 37110-000, Brasil"
+        }
+      ],
+      "id": "7f644d3c-2dfb-4b4d-8e47-3af573bead70"
+    },
+    {
+      "name": "teee",
+      "category": "rtrerer",
+      "contactInfo": [
+        {
+          "id": "2cb53e4a-0685-4dcd-80a1-0956e3b8e550",
+          "value": "eee@eee.com",
+          "type": "email"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "9ef4d1b8-0358-4d62-a04d-1e2365b9c912",
+          "text": "Frankfurt am Main, Alemanha"
+        },
+        {
+          "id": "bd86faf4-527d-434a-b29f-10cc5741a1a4",
+          "text": "Goa, Índia"
+        },
+        {
+          "id": "e5c6cf97-ba18-4202-a24f-e0d6b9a2a523",
+          "text": "R. Maria Marcolina - Brás, São Paulo - SP, 03011-001, Brasil"
+        }
+      ],
+      "id": "6b37a743-2c1d-476b-8a4e-aae71780dddc"
+    },
+    {
+      "name": "aaa",
+      "category": "ss",
+      "contactInfo": [
+        {
+          "id": "d7e19352-5b18-4d1b-be34-09368a20746e",
+          "value": "(01) 0 1010-1010",
+          "type": "phone"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "6c637c83-f378-478f-9373-8caa01c147fd",
+          "text": "Noroeste de México, México"
+        }
+      ],
+      "id": "bbbf3a25-7d25-44c9-a7e4-a2d46b6a281c"
+    },
+    {
+      "name": "xcvxcv",
+      "category": "xcvcxv",
+      "contactInfo": [
+        {
+          "id": "ffe3e1a3-7d3c-4660-8b1e-cb946f48d137",
+          "value": "(01) 0 1010-0000",
+          "type": "cell"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "d4a1e281-f267-469c-8e46-1d824e5557aa",
+          "text": "Mevlana, 101010. Sk., 33080 Toroslar/Mersin, Turquia"
+        }
+      ],
+      "id": "4feb648e-8128-40b0-9855-702117a0540f"
+    },
+    {
+      "name": "Fulano da Silva Mendes Praxedes Nome Grande",
+      "category": "Nomes",
+      "contactInfo": [
+        {
+          "id": "2cf12991-79a4-4995-b0b0-3ceb02082dc5",
+          "value": "fulano@gmail.com",
+          "type": "email"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "10d8c0c5-08ef-4c6e-827c-493cf63d4d65",
+          "text": "R. São Teodoro - Vila Carmosina, São Paulo - SP, 08290-005, Brasil"
+        }
+      ],
+      "id": "f177eb46-8121-4c37-a748-ac326a3c45d7"
+    },
+    {
+      "name": "contato",
+      "category": "contato",
+      "contactInfo": [
+        {
+          "id": "1eb549a9-b7cc-4d0b-8040-285bbe40ac95",
+          "value": "(01) 0101-01010",
+          "type": "phone"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "ad9ad1a1-c368-4ffd-b2e9-32a40d809837",
+          "text": "R. Maranhão - Água Verde, Curitiba - PR, Brasil"
+        }
+      ],
+      "id": "yL52Qwi"
+    },
+    {
+      "name": "OOOOOOOOOOOOOOOOOOO",
+      "category": "EEEE",
+      "contactInfo": [
+        {
+          "id": "dee4c089-da6f-43a2-9543-16d5a9e170d7",
+          "value": "aaa@aa.com",
+          "type": "email"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "ab32774b-9b58-4c88-857f-719fb94978c9",
+          "text": "Retiro, Cidade Autônoma de Buenos Aires, Argentina"
+        }
+      ],
+      "id": "qKgy3x8"
+    },
+    {
+      "name": "uuid",
+      "category": "uuid",
+      "contactInfo": [
+        {
+          "id": "b37b93ad-e446-49ce-b61d-da6b46143d24",
+          "value": "uui@uuid.com",
+          "type": "email"
+        }
+      ],
+      "addresses": [
+        {
+          "id": "ff20eaf4-163a-47a9-ae89-b4174c662149",
+          "text": "G274+ItFV, Highlands Ranch, CO 80126, EUA"
+        }
+      ],
+      "id": "EvOTRPZ"
     }
   ]
 }

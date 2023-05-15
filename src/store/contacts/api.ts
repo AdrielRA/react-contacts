@@ -8,12 +8,13 @@ const contactApi = createApi({
     getContacts: builder.query<IContact[], void>({
       query: () => "/contacts",
       providesTags: ["contacts"],
-      transformResponse: (response: IContact[]) => {
-        return response.reverse();
-      },
     }),
-    getContactById: builder.query<IContact, number>({
+    getContactById: builder.query<IContact, string>({
       query: (id) => `/contacts/${id}`,
+      providesTags: (result) =>
+        result?.id
+          ? [{ type: "contacts" as const, id: result.id }, "contacts"]
+          : ["contacts"],
     }),
     addContact: builder.mutation<IContact, IContact>({
       query: (contact) => ({
@@ -29,14 +30,14 @@ const contactApi = createApi({
         body: contact,
         method: "PATCH",
       }),
-      invalidatesTags: ["contacts"],
+      invalidatesTags: (_, __, arg) => [{ type: "contacts", id: arg.id }],
     }),
-    deleteContact: builder.mutation<void, number>({
+    deleteContact: builder.mutation<void, string>({
       query: (id) => ({
         url: `/contacts/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["contacts"],
+      invalidatesTags: (_, __, id) => [{ type: "contacts", id }],
     }),
   }),
 });
