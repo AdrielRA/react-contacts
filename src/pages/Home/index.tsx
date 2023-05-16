@@ -26,15 +26,124 @@ import {
 import { AppBar, Button, FilterInput } from "components";
 import { useAlert } from "contexts";
 import { ContactController } from "controllers";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import contactApi from "store/contacts/api";
 import { IContactViewModel } from "viewModels";
 
+interface RowProps {
+  contact?: IContactViewModel;
+  subtitle?: string;
+  contacts?: IContactViewModel[];
+  handleRemove: (id: IContactViewModel["id"]) => void;
+}
+const Row: React.FC<RowProps> = ({
+  contact,
+  contacts,
+  subtitle,
+  handleRemove,
+}: RowProps) => {
+  const navigate = useNavigate();
+  const theme = useTheme();
+
+  const buildRow = (c: IContactViewModel) => (
+    <TableRow
+      key={c.id}
+      sx={{
+        "&:last-child td, &:last-child th": { border: 0 },
+      }}
+    >
+      <TableCell component="th" scope="row">
+        <Avatar alt={c.name} />
+      </TableCell>
+      <TableCell
+        component="th"
+        scope="row"
+        sx={{
+          minWidth: "15rem",
+          maxWidth: "30rem",
+        }}
+      >
+        {c.name}
+      </TableCell>
+      <TableCell sx={{ whiteSpace: "nowrap" }}>
+        {c.contactInfo?.[0]?.value ?? "Não informado"}
+      </TableCell>
+      <TableCell sx={{ minWidth: "20rem" }}>
+        {c.addresses?.[0]?.text ?? "Não informado"}
+      </TableCell>
+      <TableCell>
+        <Chip label={c.category ?? "Não informado"} variant="outlined" />
+      </TableCell>
+      <TableCell
+        align="right"
+        sx={{
+          whiteSpace: "nowrap",
+        }}
+      >
+        <IconButton
+          color="primary"
+          size="small"
+          title="Visualizar contato"
+          onClick={() =>
+            navigate("/contact/view", {
+              state: {
+                contactId: c.id,
+              },
+            })
+          }
+        >
+          <VisibilityOutlined />
+        </IconButton>
+        <IconButton
+          color="primary"
+          size="small"
+          title="Editar contato"
+          onClick={() =>
+            navigate("/contact/edit", {
+              state: {
+                contactId: c.id,
+              },
+            })
+          }
+        >
+          <ModeEditOutline />
+        </IconButton>
+        <IconButton
+          color="primary"
+          size="small"
+          title="Excluir contato"
+          onClick={() => handleRemove(c.id)}
+        >
+          <DeleteOutline />
+        </IconButton>
+      </TableCell>
+    </TableRow>
+  );
+
+  return (
+    <React.Fragment>
+      {contacts && (
+        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+          <TableCell component="th" scope="row" colSpan={6}>
+            <Avatar sx={{ bgcolor: theme.palette.primary.main }}>
+              {subtitle?.toUpperCase()}
+            </Avatar>
+          </TableCell>
+        </TableRow>
+      )}
+      {contact ? buildRow(contact) : contacts?.map(buildRow)}
+    </React.Fragment>
+  );
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState<IContactViewModel[]>();
+  const [grouped, setGrouped] = useState<{
+    [key: string]: IContactViewModel[];
+  }>();
   const confirm = useAlert();
 
   const theme = useTheme();
@@ -59,12 +168,12 @@ const Home = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery(
-    ["contacts", filter],
+    ["contacts", filter, groupBy],
     ({ pageParam = 1 }) =>
       ContactController.getContacts({
         _page: pageParam,
-        _limit: 20,
-        ...filter,
+        _limit: 2,
+        ...(groupBy ? { sort: groupBy, order: "asc" } : filter),
       }),
     {
       refetchOnWindowFocus: false,
@@ -75,14 +184,40 @@ const Home = () => {
     },
   );
 
+  const groupIt = (key: "name" | "category", array: IContactViewModel[]) => {
+    const result: { [key: string]: IContactViewModel[] } = {};
+
+    for (let i = 0; i < array.length; i++) {
+      const item = array[i];
+      const currentWord = item[key];
+      const firstChar = currentWord[0].toLowerCase();
+      const innerArr: IContactViewModel[] = [];
+      if (result[firstChar] === undefined) {
+        innerArr.push(item);
+        result[firstChar] = innerArr;
+      } else {
+        result[firstChar].push(item);
+      }
+    }
+    return Object.keys(result)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = result[key];
+        return obj;
+      }, {} as { [key: string]: IContactViewModel[] });
+  };
+
   const handleProcessTableData = useCallback(() => {
     const data = results?.pages?.flat();
     switch (groupBy) {
       case "name":
+        setGrouped(groupIt("name", data ?? []));
         break;
       case "category":
+        setGrouped(groupIt("category", data ?? []));
         break;
       default:
+        setGrouped(undefined);
         setContacts(data);
         break;
     }
@@ -172,9 +307,9 @@ const Home = () => {
           </Button>
         </Grid>
         <FilterInput
+          sx={{ pt: 1 }}
           onChange={setFilter}
           onGroupBy={setGroupBy}
-          sx={{ pt: 1 }}
         />
         <TableContainer sx={{ mt: 2, height: "calc(100vh - 295px)" }}>
           <Table stickyHeader sx={{ minWidth: 650 }} aria-label="contact table">
@@ -234,83 +369,22 @@ const Home = () => {
                     </Grid>
                   </TableCell>
                 </TableRow>
-              ) : (
+              ) : !grouped ? (
                 contacts?.map((contact) => (
-                  <TableRow
+                  <Row
                     key={contact.id}
-                    sx={{
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <Avatar alt={contact.name} />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{
-                        minWidth: "15rem",
-                        maxWidth: "30rem",
-                      }}
-                    >
-                      {contact.name}
-                    </TableCell>
-                    <TableCell sx={{ whiteSpace: "nowrap" }}>
-                      {contact.contactInfo?.[0]?.value ?? "Não informado"}
-                    </TableCell>
-                    <TableCell sx={{ minWidth: "20rem" }}>
-                      {contact.addresses?.[0]?.text ?? "Não informado"}
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={contact.category ?? "Não informado"}
-                        variant="outlined"
-                      />
-                    </TableCell>
-                    <TableCell
-                      align="right"
-                      sx={{
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      <IconButton
-                        color="primary"
-                        size="small"
-                        title="Visualizar contato"
-                        onClick={() =>
-                          navigate("/contact/view", {
-                            state: {
-                              contactId: contact.id,
-                            },
-                          })
-                        }
-                      >
-                        <VisibilityOutlined />
-                      </IconButton>
-                      <IconButton
-                        color="primary"
-                        size="small"
-                        title="Editar contato"
-                        onClick={() =>
-                          navigate("/contact/edit", {
-                            state: {
-                              contactId: contact.id,
-                            },
-                          })
-                        }
-                      >
-                        <ModeEditOutline />
-                      </IconButton>
-                      <IconButton
-                        color="primary"
-                        size="small"
-                        title="Excluir contato"
-                        onClick={() => handleRemove(contact.id)}
-                      >
-                        <DeleteOutline />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
+                    contact={contact}
+                    handleRemove={handleRemove}
+                  />
+                ))
+              ) : (
+                Object.entries(grouped)?.map(([key, contacts], idx) => (
+                  <Row
+                    subtitle={key}
+                    contacts={contacts}
+                    key={`${key}-${idx}`}
+                    handleRemove={handleRemove}
+                  />
                 ))
               )}
               {hasNextPage && (

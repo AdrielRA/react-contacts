@@ -2,7 +2,7 @@ declare module "viewModels" {
   export interface IContactViewModel {
     id: string;
     name: string;
-    category?: string;
+    category: string;
     addresses?: IAddress[];
     contactInfo?: IContactInfo[];
   }

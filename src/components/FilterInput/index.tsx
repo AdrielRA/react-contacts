@@ -71,10 +71,6 @@ const FilterInput: React.FC<FilterInputProps> = ({
   );
 
   useEffect(() => {
-    setTerm(undefined);
-  }, [selectedFilter]);
-
-  useEffect(() => {
     const timer = setTimeout(handleSearch, 1000);
     return () => clearTimeout(timer);
   }, [handleSearch]);
@@ -83,6 +79,21 @@ const FilterInput: React.FC<FilterInputProps> = ({
     setOpenGroup(false);
     handleGroupBy();
   }, [handleGroupBy]);
+
+  useEffect(() => {
+    if (selectedFilter) setGroupBy(undefined);
+  }, [selectedFilter]);
+
+  useEffect(() => {
+    if (groupBy) {
+      setTerm(undefined);
+      setSelectedFilter(undefined);
+    }
+  }, [groupBy]);
+
+  useEffect(() => {
+    if (term) setGroupBy(undefined);
+  }, [term]);
 
   const handleTermChange = (newTerm: string) => {
     const currentTerm = newTerm.trim();
@@ -146,6 +157,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
             </Grid>
           ) : (
             <InputMask
+              value={term ?? ""}
               maskPlaceholder={null}
               mask={getMask(selectedFilter)}
               onChange={(e) => handleTermChange(e.target.value)}
