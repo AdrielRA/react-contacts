@@ -172,7 +172,7 @@ const Home = () => {
     ({ pageParam = 1 }) =>
       ContactController.getContacts({
         _page: pageParam,
-        _limit: 2,
+        _limit: 10,
         ...(groupBy ? { sort: groupBy, order: "asc" } : filter),
       }),
     {
